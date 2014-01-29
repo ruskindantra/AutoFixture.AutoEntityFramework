@@ -17,7 +17,7 @@ fixture.Customize(
 public class AutoEFAttribute : AutoDataAttribute
 {
     public AutoEFAttribute()
-        : base(new Fixture().Customize(new EntityCustomization(new DbContextEntityTypesProvider(typeof(CareerEntities)))))
+        : base(new Fixture().Customize(new EntityCustomization(new DbContextEntityTypesProvider(typeof(MyDbContext)))))
     { }
 }
 ```
