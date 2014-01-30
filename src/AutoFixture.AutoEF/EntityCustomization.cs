@@ -20,17 +20,17 @@ namespace AutoFixture.AutoEF
         {
             var cachedTypesProvider = new CachedEntityTypesProvider(_entityTypesProvider);
 
-            fixture.Customizations.Insert(0, 
-                new Postprocessor(
-                    new FilteringSpecimenBuilder(
+            fixture.Customizations.Insert(0,
+                new FilteringSpecimenBuilder(
+                    new Postprocessor(
                         new EntitySpecimenBuilder(),
-                        new EntityRequestSpecification(cachedTypesProvider)),
-                    new AutoPropertiesCommand(
-                        new InverseRequestSpecification(
-                            new OrRequestSpecification(
-                                new NavigationPropertyRequestSpecification(cachedTypesProvider),
-                                new DynamicProxyFieldRequestSpecification())
-                            ))));
+                        new AutoPropertiesCommand(
+                            new InverseRequestSpecification(
+                                new OrRequestSpecification(
+                                    new NavigationPropertyRequestSpecification(cachedTypesProvider),
+                                    new DynamicProxyFieldRequestSpecification())))),
+                    new EntityRequestSpecification(cachedTypesProvider)));
+
         }
     }
 }
