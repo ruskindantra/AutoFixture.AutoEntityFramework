@@ -11,10 +11,12 @@ namespace AutoFixture.AutoEF.Interception
 
         public FilteringInterceptor(IInterceptionPolicy policy, IInterceptor interceptor, IInterceptor elseInterceptor)
         {
-            if (interceptor == null)
-                throw new ArgumentNullException("interceptor");
             if (policy == null)
                 throw new ArgumentNullException("policy");
+            if (interceptor == null)
+                throw new ArgumentNullException("interceptor");
+            if (elseInterceptor == null)
+                throw new ArgumentNullException("elseInterceptor");
 
             _interceptor = interceptor;
             _policy = policy;
