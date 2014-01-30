@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CachedEntityTypesProvider.cs" />
     <Compile Include="DbContextEntityTypesProvider.cs" />
     <Compile Include="DynamicProxyFieldRequestSpecification.cs" />
     <Compile Include="EntityCustomization.cs" />
