@@ -64,9 +64,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoNSubAttribute.cs" />
     <Compile Include="DbContextEntityTypesProviderTest.cs" />
     <Compile Include="EntityCustomizationTest.cs" />
     <Compile Include="IntegrationTest.cs" />
+    <Compile Include="Interception\AndInterceptionPolicyTest.cs" />
     <Compile Include="MockEntities\Bar.cs" />
     <Compile Include="MockEntities\Foo.cs" />
     <Compile Include="MockEntities\MockDbContext.cs" />
