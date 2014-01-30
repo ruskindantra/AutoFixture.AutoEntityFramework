@@ -18,15 +18,17 @@ namespace AutoFixture.AutoEF
 
         public void Customize(IFixture fixture)
         {
+            var cachedTypesProvider = new CachedEntityTypesProvider(_entityTypesProvider);
+
             fixture.Customizations.Insert(0, 
                 new Postprocessor(
                     new FilteringSpecimenBuilder(
                         new EntitySpecimenBuilder(),
-                        new EntityRequestSpecification(_entityTypesProvider)),
+                        new EntityRequestSpecification(cachedTypesProvider)),
                     new AutoPropertiesCommand(
                         new InverseRequestSpecification(
                             new OrRequestSpecification(
-                                new NavigationPropertyRequestSpecification(_entityTypesProvider),
+                                new NavigationPropertyRequestSpecification(cachedTypesProvider),
                                 new DynamicProxyFieldRequestSpecification())
                             ))));
         }

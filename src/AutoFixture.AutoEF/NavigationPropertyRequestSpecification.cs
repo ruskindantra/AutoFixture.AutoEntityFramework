@@ -1,6 +1,6 @@
 ﻿using Ploeh.AutoFixture.Kernel;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace AutoFixture.AutoEF
@@ -23,18 +23,16 @@ namespace AutoFixture.AutoEF
             if (!pi.GetGetMethod().IsVirtual)
                 return false;
 
-            var entityTypes = new HashSet<Type>(_entityTypesProvider.GetTypes());
-
-            if (!entityTypes.Contains(pi.DeclaringType.BaseType))
+            if (!_entityTypesProvider.GetTypes().Contains(pi.DeclaringType.BaseType))
                 return false;
 
-            if (entityTypes.Contains(pi.PropertyType))
+            if (_entityTypesProvider.GetTypes().Contains(pi.PropertyType))
                 return true;
 
             var t = pi.PropertyType;
             return t.IsGenericType
                 && t.GetGenericTypeDefinition() == typeof (ICollection<>)
-                && entityTypes.Contains(t.GenericTypeArguments[0]);
+                && _entityTypesProvider.GetTypes().Contains(t.GenericTypeArguments[0]);
         }
     }
 }

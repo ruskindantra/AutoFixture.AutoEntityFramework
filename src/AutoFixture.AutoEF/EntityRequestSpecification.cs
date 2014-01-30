@@ -16,10 +16,7 @@ namespace AutoFixture.AutoEF
         public bool IsSatisfiedBy(object request)
         {
             var type = request as Type;
-            if (type == null)
-                return false;
-
-            return _entityTypesProvider.GetTypes().Contains(type);
+            return type != null && _entityTypesProvider.GetTypes().Contains(type);
         }
     }
 }
