@@ -47,12 +47,24 @@
     <Compile Include="DbContextEntityTypesProvider.cs" />
     <Compile Include="DynamicProxyFieldRequestSpecification.cs" />
     <Compile Include="EntityCustomization.cs" />
-    <Compile Include="EntityInterceptor.cs" />
     <Compile Include="EntityRequestSpecification.cs" />
     <Compile Include="EntitySpecimenBuilder.cs" />
     <Compile Include="IEntityTypesProvider.cs" />
+    <Compile Include="Interception\AndInterceptionPolicy.cs" />
+    <Compile Include="Interception\CompositeInterceptor.cs" />
+    <Compile Include="Interception\EmptyCollectionReturnValueInterceptionPolicy.cs" />
+    <Compile Include="Interception\FilteringInterceptor.cs" />
+    <Compile Include="Interception\IdPropertySetterInterceptor.cs" />
+    <Compile Include="Interception\IInterceptionPolicy.cs" />
+    <Compile Include="Interception\NullInterceptor.cs" />
+    <Compile Include="Interception\NullReturnValueInterceptionPolicy.cs" />
+    <Compile Include="Interception\OrInterceptionPolicy.cs" />
+    <Compile Include="Interception\ProceedingInterceptor.cs" />
+    <Compile Include="Interception\PropertyGetterInterceptionPolicy.cs" />
+    <Compile Include="Interception\SetPropertyReturnValueInterceptor.cs" />
     <Compile Include="NavigationPropertyRequestSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interception\ReturnValueOverrideInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
