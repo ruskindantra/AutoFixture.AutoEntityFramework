@@ -23,6 +23,9 @@ namespace AutoFixture.AutoEF.Interception
 
         public bool ShouldIntercept(IInvocation invocation)
         {
+            if (invocation == null)
+                throw new ArgumentNullException("invocation");
+
             return _policies.Any(x => x.ShouldIntercept(invocation));
         }
     }
