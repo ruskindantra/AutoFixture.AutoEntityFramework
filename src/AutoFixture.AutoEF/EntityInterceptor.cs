@@ -1,6 +1,8 @@
 ﻿using Castle.DynamicProxy;
 using Ploeh.AutoFixture.Kernel;
 using System;
+using System.Collections;
+using System.Linq;
 
 namespace AutoFixture.AutoEF
 {
@@ -20,7 +22,7 @@ namespace AutoFixture.AutoEF
         {
             invocation.Proceed();
 
-            if (!IsEmptyPropertyGetter(invocation))
+            if (!IsEmptyNavigationPropertyGetter(invocation))
                 return;
 
             var propertyName = invocation.Method.Name.Substring(4);
@@ -44,11 +46,19 @@ namespace AutoFixture.AutoEF
             target.GetType().GetProperty(propertyName).SetValue(target, generatedProxy);
         }
 
-        private static bool IsEmptyPropertyGetter(IInvocation invocation)
+        private static bool IsEmptyNavigationPropertyGetter(IInvocation invocation)
         {
-            return invocation.Method.ReturnType != typeof (void)
-                && invocation.Method.IsSpecialName
-                && invocation.ReturnValue == null;
+            if (invocation.Method.ReturnType == typeof (void))
+                return false;
+
+            if (!invocation.Method.IsSpecialName)
+                return false;
+
+            if (invocation.ReturnValue == null)
+                return true;
+
+            var collection = invocation.ReturnValue as IEnumerable;
+            return collection != null && !collection.Cast<object>().Any();
         }
     }
 }

@@ -41,9 +41,25 @@ namespace AutoFixture.AutoEF
 
         private bool IsNavigationProperty(PropertyInfo pi)
         {
-            return pi != null
-                && EntityTypes.Contains(pi.DeclaringType.BaseType)
-                && EntityTypes.Contains(pi.PropertyType);
+            if (pi == null)
+                return false;
+
+            if (!pi.GetGetMethod().IsVirtual)
+                return false;
+
+            if (!EntityTypes.Contains(pi.DeclaringType.BaseType))
+                return false;
+
+            var t = pi.PropertyType;
+            if (EntityTypes.Contains(t))
+                return true;
+
+            if (t.IsGenericType
+                && t.GetGenericTypeDefinition() == typeof (ICollection<>)
+                && EntityTypes.Contains(t.GenericTypeArguments[0]))
+                return true;
+
+            return false;
         }
 
         private static bool IsDynamicProxyField(FieldInfo fi)
