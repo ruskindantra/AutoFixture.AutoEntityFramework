@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>AutoFixture.AutoEF</id>
+        <version>0.1.0</version>
+        <title>AutoFixture.AutoEntityFramework</title>
+        <authors>Alex Fox Gill</authors>
+        <owners>Alex Fox Gill</owners>
+        <projectUrl>https://github.com/alexfoxgill/AutoFixture.AutoEntityFramework</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>An AutoFixture customization that lazy-loads navigation properties on Entity Framework objects</description>
+        <copyright>MIT License</copyright>
+        <language>en-GB</language>
+        <tags>AutoFixture EntityFramework</tags>
+        <dependencies>
+            <dependency id="AutoFixture" version="3.16.4" />
+            <dependency id="Castle.Core" version="3.2.2" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\src\AutoFixture.AutoEF\bin\Release\AutoFixture.AutoEF.dll" target="lib\net45\AutoFixture.AutoEF.dll" />
+    </files>
+</package>
