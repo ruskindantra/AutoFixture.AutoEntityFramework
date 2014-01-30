@@ -72,6 +72,7 @@
     <Compile Include="Interception\CompositeInterceptorTest.cs" />
     <Compile Include="Interception\EmptyCollectionReturnValueInterceptionPolicyTest.cs" />
     <Compile Include="Interception\FilteringInterceptorTest.cs" />
+    <Compile Include="Interception\IdPropertySetterInterceptorTest.cs" />
     <Compile Include="MockEntities\Bar.cs" />
     <Compile Include="MockEntities\Foo.cs" />
     <Compile Include="MockEntities\MockDbContext.cs" />
