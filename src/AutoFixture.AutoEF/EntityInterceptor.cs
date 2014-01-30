@@ -46,12 +46,14 @@ namespace AutoFixture.AutoEF
             target.GetType().GetProperty(propertyName).SetValue(target, generatedProxy);
         }
 
+        /// <summary>
+        /// Determines whether an invocation is the getter for
+        /// either a null navigation property or an empty collection
+        /// </summary>
         private static bool IsEmptyNavigationPropertyGetter(IInvocation invocation)
         {
-            if (invocation.Method.ReturnType == typeof (void))
-                return false;
-
-            if (!invocation.Method.IsSpecialName)
+            if (invocation.Method.ReturnType == typeof (void)
+                || !invocation.Method.IsSpecialName)
                 return false;
 
             if (invocation.ReturnValue == null)
