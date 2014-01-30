@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,6 +9,12 @@ namespace AutoFixture.AutoEF.Interception
     {
         public bool ShouldIntercept(IInvocation invocation)
         {
+            if (invocation == null)
+                throw new ArgumentNullException("invocation");
+
+            if (invocation.ReturnValue == null)
+                return false;
+
             var t = invocation.ReturnValue.GetType();
             if (!t.IsGenericType)
                 return false;
