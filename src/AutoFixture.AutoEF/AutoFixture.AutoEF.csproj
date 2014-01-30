@@ -44,10 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbContextEntityTypesProvider.cs" />
+    <Compile Include="DynamicProxyFieldRequestSpecification.cs" />
     <Compile Include="EntityCustomization.cs" />
     <Compile Include="EntityInterceptor.cs" />
+    <Compile Include="EntityRequestSpecification.cs" />
     <Compile Include="EntitySpecimenBuilder.cs" />
     <Compile Include="IEntityTypesProvider.cs" />
+    <Compile Include="NavigationPropertyRequestSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

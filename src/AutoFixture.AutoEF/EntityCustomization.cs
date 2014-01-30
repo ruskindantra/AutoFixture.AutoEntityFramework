@@ -20,8 +20,15 @@ namespace AutoFixture.AutoEF
         {
             fixture.Customizations.Insert(0, 
                 new Postprocessor(
-                    new EntitySpecimenBuilder(_entityTypesProvider), 
-                    new AutoPropertiesCommand()));
+                    new FilteringSpecimenBuilder(
+                        new EntitySpecimenBuilder(),
+                        new EntityRequestSpecification(_entityTypesProvider)),
+                    new AutoPropertiesCommand(
+                        new InverseRequestSpecification(
+                            new OrRequestSpecification(
+                                new NavigationPropertyRequestSpecification(_entityTypesProvider),
+                                new DynamicProxyFieldRequestSpecification())
+                            ))));
         }
     }
 }
