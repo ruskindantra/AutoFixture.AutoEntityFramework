@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy;
+using System;
 
 namespace AutoFixture.AutoEF.Interception
 {
@@ -6,6 +7,9 @@ namespace AutoFixture.AutoEF.Interception
     {
         public bool ShouldIntercept(IInvocation invocation)
         {
+            if (invocation == null)
+                throw new ArgumentNullException("invocation");
+
             return invocation.ReturnValue == null;
         }
     }
