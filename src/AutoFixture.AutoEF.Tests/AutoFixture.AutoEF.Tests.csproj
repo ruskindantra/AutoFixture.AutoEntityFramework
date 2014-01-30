@@ -76,6 +76,7 @@
     <Compile Include="Interception\NullInterceptorTest.cs" />
     <Compile Include="Interception\NullReturnValueInterceptionPolicyTest.cs" />
     <Compile Include="Interception\OrInterceptionPolicyTest.cs" />
+    <Compile Include="Interception\ProceedingInterceptorTest.cs" />
     <Compile Include="MockEntities\Bar.cs" />
     <Compile Include="MockEntities\Foo.cs" />
     <Compile Include="MockEntities\MockDbContext.cs" />
