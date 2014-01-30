@@ -22,6 +22,9 @@ namespace AutoFixture.AutoEF.Interception
 
         public void Intercept(IInvocation invocation)
         {
+            if (invocation == null)
+                throw new ArgumentNullException("invocation");
+
             foreach (var interceptor in _interceptors)
                 interceptor.Intercept(invocation);
         }

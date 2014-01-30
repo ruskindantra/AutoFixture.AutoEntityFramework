@@ -19,6 +19,12 @@ namespace AutoFixture.AutoEF.Tests.Interception
         }
 
         [Theory, AutoNSub]
+        public void SutIsInterceptionPolicy(AndInterceptionPolicy sut)
+        {
+            sut.Should().BeAssignableTo<IInterceptionPolicy>();
+        }
+
+        [Theory, AutoNSub]
         public void ThrowsOnNullInvocation(AndInterceptionPolicy sut)
         {
             sut.Invoking(s => s.ShouldIntercept(null))
