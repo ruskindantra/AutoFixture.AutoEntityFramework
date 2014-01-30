@@ -44,7 +44,7 @@ namespace AutoFixture.AutoEF.Tests.Interception
         }
 
         [Theory, AutoNSub]
-        public void InterceptorsCalledInorder([Frozen] IInterceptor[] interceptors,
+        public void InterceptorsCalledInOrder([Frozen] IInterceptor[] interceptors,
             CompositeInterceptor sut,
             IInvocation invocation)
         {

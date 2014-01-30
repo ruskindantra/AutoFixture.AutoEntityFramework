@@ -21,6 +21,7 @@ namespace AutoFixture.AutoEF.Tests.Interception
         public void ThrowsOnNullInterceptor(IInterceptionPolicy policy, IInterceptor elseInterceptor)
         {
             Action act = () => new FilteringInterceptor(policy, null, elseInterceptor);
+
             act.ShouldThrow<ArgumentNullException>();
         }
 
@@ -30,6 +31,12 @@ namespace AutoFixture.AutoEF.Tests.Interception
             Action act = () => new FilteringInterceptor(policy, interceptor, null);
 
             act.ShouldThrow<ArgumentNullException>();
+        }
+
+        [Theory, AutoNSub]
+        public void SutIsInterceptor(FilteringInterceptor sut)
+        {
+            sut.Should().BeAssignableTo<IInterceptor>();
         }
 
         [Theory, AutoNSub]

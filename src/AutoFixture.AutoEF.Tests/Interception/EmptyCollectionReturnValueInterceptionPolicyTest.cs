@@ -18,6 +18,12 @@ namespace AutoFixture.AutoEF.Tests.Interception
                 .ShouldThrow<ArgumentNullException>();
         }
 
+        [Theory, AutoNSub]
+        public void SutIsInterceptionPolicy(SUT sut)
+        {
+            sut.Should().BeAssignableTo<IInterceptionPolicy>();
+        }
+
         [Theory]
         [InlineAutoNSub(null)]
         [InlineAutoNSub(1)]
