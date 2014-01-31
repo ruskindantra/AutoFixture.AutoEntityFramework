@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoNSubAttribute.cs" />
+    <Compile Include="CachedEntityTypesProviderTest.cs" />
     <Compile Include="DbContextEntityTypesProviderTest.cs" />
     <Compile Include="EntityCustomizationTest.cs" />
     <Compile Include="IntegrationTest.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Interception\ProceedingInterceptorTest.cs" />
     <Compile Include="Interception\PropertyGetterInterceptionPolicyTest.cs" />
     <Compile Include="Interception\ReturnValueOverrideInterceptorTest.cs" />
+    <Compile Include="Interception\SetPropertyReturnValueInterceptorTest.cs" />
     <Compile Include="MockEntities\Bar.cs" />
     <Compile Include="MockEntities\Foo.cs" />
     <Compile Include="MockEntities\MockDbContext.cs" />
