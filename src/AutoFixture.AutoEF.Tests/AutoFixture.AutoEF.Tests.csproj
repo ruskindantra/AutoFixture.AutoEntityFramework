@@ -86,6 +86,7 @@
     <Compile Include="MockEntities\Foo.cs" />
     <Compile Include="MockEntities\MockDbContext.cs" />
     <Compile Include="MockEntities\Qux.cs" />
+    <Compile Include="NavigationPropertyRequestSpecificationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

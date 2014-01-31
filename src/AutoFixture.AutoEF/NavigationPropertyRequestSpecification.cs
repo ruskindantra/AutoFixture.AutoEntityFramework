@@ -1,4 +1,5 @@
 ﻿using Ploeh.AutoFixture.Kernel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -16,6 +17,9 @@ namespace AutoFixture.AutoEF
 
         public bool IsSatisfiedBy(object request)
         {
+            if (request == null)
+                throw new ArgumentNullException("request");
+
             var pi = request as PropertyInfo;
             if (pi == null)
                 return false;
@@ -23,16 +27,17 @@ namespace AutoFixture.AutoEF
             if (!pi.GetGetMethod().IsVirtual)
                 return false;
 
-            if (!_entityTypesProvider.GetTypes().Contains(pi.DeclaringType.BaseType))
+            var entityTypes = _entityTypesProvider.GetTypes();
+            if (!entityTypes.Contains(pi.DeclaringType) && !entityTypes.Contains(pi.DeclaringType.BaseType))
                 return false;
 
-            if (_entityTypesProvider.GetTypes().Contains(pi.PropertyType))
+            if (entityTypes.Contains(pi.PropertyType))
                 return true;
 
             var t = pi.PropertyType;
             return t.IsGenericType
                 && t.GetGenericTypeDefinition() == typeof (ICollection<>)
-                && _entityTypesProvider.GetTypes().Contains(t.GenericTypeArguments[0]);
+                && entityTypes.Contains(t.GenericTypeArguments[0]);
         }
     }
 }
