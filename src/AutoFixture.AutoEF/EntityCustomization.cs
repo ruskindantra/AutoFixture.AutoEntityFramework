@@ -28,7 +28,7 @@ namespace AutoFixture.AutoEF
                             new InverseRequestSpecification(
                                 new OrRequestSpecification(
                                     new NavigationPropertyRequestSpecification(cachedTypesProvider),
-                                    new DynamicProxyFieldRequestSpecification())))),
+                                    new InterceptorsFieldRequestSpecification())))),
                     new EntityRequestSpecification(cachedTypesProvider)));
 
         }
