@@ -13,18 +13,25 @@ namespace AutoFixture.AutoEF
         {
             return _proxyGenerator.CreateClassProxy((Type) request, 
                     new CompositeInterceptor(
+                        // first allow the invocation to proceed
                         new ProceedingInterceptor(),
-                        new FilteringInterceptor(
+                        // then check -
+                        new FilteringInterceptor(    
                             new AndInterceptionPolicy(
-                                new PropertyGetterInterceptionPolicy(),
-                                new OrInterceptionPolicy(
+                                // the invocation was a property getter
+                                new PropertyGetterInterceptionPolicy(), 
+                                // and the return value was null or empty collection
+                                new OrInterceptionPolicy(               
                                     new NullReturnValueInterceptionPolicy(),
                                     new EmptyCollectionReturnValueInterceptionPolicy())),
+                            // if the above conditions pass
                             new CompositeInterceptor(
+                                // override the return value with an AutoFixture resolved object
                                 new ReturnValueOverrideInterceptor(i => context.Resolve(i.Method.ReturnType)),
+                                // set the Id property of the new object
                                 new IdPropertySetterInterceptor(),
-                                new SetPropertyReturnValueInterceptor()), 
-                            new NullInterceptor())));
+                                // then persist the property value
+                                new SetPropertyReturnValueInterceptor()))));
         }
     }
 }

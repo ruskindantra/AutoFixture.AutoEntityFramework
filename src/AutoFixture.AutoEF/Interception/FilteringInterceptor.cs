@@ -9,6 +9,10 @@ namespace AutoFixture.AutoEF.Interception
         private readonly IInterceptionPolicy _policy;
         private readonly IInterceptor _elseInterceptor;
 
+        public FilteringInterceptor(IInterceptionPolicy policy, IInterceptor interceptor)
+            : this (policy, interceptor, new NullInterceptor())
+        { }
+
         public FilteringInterceptor(IInterceptionPolicy policy, IInterceptor interceptor, IInterceptor elseInterceptor)
         {
             if (policy == null)
