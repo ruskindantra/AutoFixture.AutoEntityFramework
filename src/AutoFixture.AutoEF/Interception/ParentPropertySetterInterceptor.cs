@@ -1,5 +1,6 @@
 ﻿using Castle.DynamicProxy;
 using System;
+using System.Collections;
 using System.Linq;
 
 namespace AutoFixture.AutoEF.Interception
@@ -15,8 +16,21 @@ namespace AutoFixture.AutoEF.Interception
                 throw new ArgumentNullException("invocation");
 
             var parent = invocation.InvocationTarget;
-            var child = invocation.ReturnValue;
 
+            var collection = invocation.ReturnValue as ICollection;
+            if (collection != null)
+            {
+                foreach (var child in collection)
+                    SetProperties(parent, child);
+            }
+            else
+            {
+                SetProperties(parent, invocation.ReturnValue);
+            }
+        }
+
+        private void SetProperties(object parent, object child)
+        {
             var matching = from prop in child.GetType().GetProperties()
                            where prop.PropertyType.IsInstanceOfType(parent)
                            select prop;
