@@ -35,3 +35,5 @@ The interceptor does the other half of the work, by intercepting `get` methods o
 
 When the interceptor creates a new navigation object, it will check for a matching `int ____Id` property. If present, it will set the `Id` property of the new object so that `foo.BarId == foo.Bar.Id`
 
+It will also check for any properties on the new object that have the same type as the parent object. If there is exactly one match, it will set that property to the parent object, along with the accompanying `____Id` property, so that `foo.Bar.Foo == foo` and `foo.Bar.FooId == foo.Id`
+
