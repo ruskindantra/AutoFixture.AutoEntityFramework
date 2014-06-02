@@ -54,6 +54,15 @@ namespace AutoFixture.AutoEF.Tests
         }
 
         [Theory, AutoEFData(typeof(MockDbContext))]
+        public void ParentShouldBeSameForCollections(Bar bar)
+        {
+            foreach (var qux in bar.Quxes)
+            {
+                (qux.Bar == bar).Should().BeTrue();
+            }
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
         public void RepeatedAccessYieldsSameObject(Foo foo)
         {
             var bar1 = foo.Bar;
