@@ -8,7 +8,7 @@
         <owners>Alex Fox Gill</owners>
         <projectUrl>https://github.com/alexfoxgill/AutoFixture.AutoEntityFramework</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <developmentDependency>true</developmentDependency>
+        
         <description>An AutoFixture customization that lazy-loads navigation properties on Entity Framework objects. See https://github.com/alexfoxgill/AutoFixture.AutoEntityFramework</description>
         <releaseNotes>v0.3.0
 - If a generated entity has a single navigation property of the type of its parent, it will set that property (with the accompanying ____Id property as well)</releaseNotes>
