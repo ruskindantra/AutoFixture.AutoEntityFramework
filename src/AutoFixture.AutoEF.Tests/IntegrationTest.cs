@@ -41,6 +41,18 @@ namespace AutoFixture.AutoEF.Tests
             foo.BarId.Should().Be(foo.Bar.Id);
         }
 
+        [Theory, AutoEFData(typeof (MockDbContext))]
+        public void ParentShouldBeSameObject(Foo foo)
+        {
+            foo.Bar.Foo.Should().BeSameAs(foo);
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void ParentIdShouldBeSame(Foo foo)
+        {
+            foo.Bar.FooId.Should().Be(foo.Id);
+        }
+
         [Theory, AutoEFData(typeof(MockDbContext))]
         public void RepeatedAccessYieldsSameObject(Foo foo)
         {

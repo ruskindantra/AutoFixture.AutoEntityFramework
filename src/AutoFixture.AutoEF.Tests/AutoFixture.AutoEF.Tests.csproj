@@ -77,6 +77,7 @@
     <Compile Include="Interception\NullInterceptorTest.cs" />
     <Compile Include="Interception\NullReturnValueInterceptionPolicyTest.cs" />
     <Compile Include="Interception\OrInterceptionPolicyTest.cs" />
+    <Compile Include="Interception\ParentPropertySetterInterceptorTest.cs" />
     <Compile Include="Interception\ProceedingInterceptorTest.cs" />
     <Compile Include="Interception\PropertyGetterInterceptionPolicyTest.cs" />
     <Compile Include="Interception\ReturnValueOverrideInterceptorTest.cs" />

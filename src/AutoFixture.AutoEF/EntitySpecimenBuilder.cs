@@ -30,6 +30,8 @@ namespace AutoFixture.AutoEF
                                 new ReturnValueOverrideInterceptor(i => context.Resolve(i.Method.ReturnType)),
                                 // set the Id property of the new object
                                 new IdPropertySetterInterceptor(),
+                                // set the parent of the new object
+                                new ParentPropertySetterInterceptor(),
                                 // then persist the property value
                                 new SetPropertyReturnValueInterceptor()))));
         }
