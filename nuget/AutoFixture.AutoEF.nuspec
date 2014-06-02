@@ -20,6 +20,6 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="lib\net45\AutoFixture.AutoEF.dll" target="lib\net45\AutoFixture.AutoEF.dll" />
+        <file src="..\src\AutoFixture.AutoEF\bin\Release\AutoFixture.AutoEF.dll" target="lib\net45\AutoFixture.AutoEF.dll" />
     </files>
 </package>
