@@ -1,5 +1,6 @@
 ﻿using Castle.DynamicProxy;
 using System;
+using System.Reflection;
 
 namespace AutoFixture.AutoEF.Interception
 {
@@ -16,9 +17,10 @@ namespace AutoFixture.AutoEF.Interception
 
             var propertyName = invocation.Method.Name.Substring(4);
             var target = invocation.InvocationTarget;
-
-            var idProp = target.GetType().GetProperty(propertyName + "Id");
-            var proxyIdProp = invocation.ReturnValue.GetType().GetProperty("Id");
+            
+            var bindingFlags = BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance;
+            var idProp = target.GetType().GetProperty(propertyName + "Id", bindingFlags);
+            var proxyIdProp = invocation.ReturnValue.GetType().GetProperty("Id", bindingFlags);
 
             if (idProp != null && proxyIdProp != null)
             {
