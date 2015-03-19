@@ -45,7 +45,11 @@
   <ItemGroup>
     <Compile Include="CachedEntityTypesProvider.cs" />
     <Compile Include="DbContextEntityTypesProvider.cs" />
+    <Compile Include="Interception\InverseInterceptionPolicy.cs" />
     <Compile Include="Interception\ParentPropertySetterInterceptor.cs" />
+    <Compile Include="Interception\PropertyLoggedInterceptionPolicy.cs" />
+    <Compile Include="Interception\PropertyLoggingInterceptor.cs" />
+    <Compile Include="Interception\PropertySetterInterceptionPolicy.cs" />
     <Compile Include="InterceptorsFieldRequestSpecification.cs" />
     <Compile Include="EntityCustomization.cs" />
     <Compile Include="EntityRequestSpecification.cs" />

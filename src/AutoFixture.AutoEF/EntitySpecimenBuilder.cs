@@ -2,6 +2,8 @@
 using Castle.DynamicProxy;
 using Ploeh.AutoFixture.Kernel;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace AutoFixture.AutoEF
 {
@@ -11,15 +13,25 @@ namespace AutoFixture.AutoEF
 
         public object Create(object request, ISpecimenContext context)
         {
+            var callLog = new HashSet<PropertyInfo>();
+
             return _proxyGenerator.CreateClassProxy((Type) request, 
                     new CompositeInterceptor(
                         // first allow the invocation to proceed
                         new ProceedingInterceptor(),
+
+                        // log the invocation if it is a property setter
+                        new FilteringInterceptor(
+                            new PropertySetterInterceptionPolicy(),
+                            new PropertyLoggingInterceptor(callLog)),
+
                         // then check -
                         new FilteringInterceptor(    
                             new AndInterceptionPolicy(
                                 // the invocation was a property getter
-                                new PropertyGetterInterceptionPolicy(), 
+                                new PropertyGetterInterceptionPolicy(),
+                                // the property hasn't been set
+                                new InverseInterceptionPolicy(new PropertyLoggedInterceptionPolicy(callLog)),
                                 // and the return value was null or empty collection
                                 new OrInterceptionPolicy(               
                                     new NullReturnValueInterceptionPolicy(),
