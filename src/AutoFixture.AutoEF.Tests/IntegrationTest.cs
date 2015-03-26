@@ -36,6 +36,13 @@ namespace AutoFixture.AutoEF.Tests
         }
 
         [Theory, AutoEFData(typeof (MockDbContext))]
+        public void GeneratedCollectionCanBeCleared(Bar bar)
+        {
+            bar.Quxes.Clear();
+            bar.Quxes.Should().HaveCount(0);
+        }
+
+        [Theory, AutoEFData(typeof (MockDbContext))]
         public void IdShouldMatchNavigationPropertyId(Foo foo)
         {
             foo.BarId.Should().Be(foo.Bar.Id);

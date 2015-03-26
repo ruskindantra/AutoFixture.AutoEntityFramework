@@ -17,13 +17,16 @@ namespace AutoFixture.AutoEF
             var intercept = Do(
                 ProceedWithCall,
                 LogPropertySetters(callLog),
-                If(IsPropertyGetter.And(ReturnsEmptyCollection.Or(PropertyNotSet(callLog).And(ReturnsNull))),
+                If(IsPropertyGetter.And(PropertyNotSet(callLog), ReturnsNull.Or(ReturnsEmptyCollection)),
                    Do(OverrideReturnValue(i => context.Resolve(i.Method.ReturnType)),
                       SetIdOfNewObject,
                       SetInverseNavigationProperty,
                       PersistGeneratedValue)));
 
-            return _proxyGenerator.CreateClassProxy((Type)request, intercept);
+            var instance = _proxyGenerator.CreateClassProxy((Type)request, intercept);
+            // ignore calls in constructor
+            callLog.Clear();
+            return instance;
         }
 
         private static IInterceptionPolicy PropertyNotSet(ISet<PropertyInfo> callLog)
