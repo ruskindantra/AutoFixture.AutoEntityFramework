@@ -14,38 +14,51 @@ namespace AutoFixture.AutoEF
         public object Create(object request, ISpecimenContext context)
         {
             var callLog = new HashSet<PropertyInfo>();
+            var intercept = Do(
+                ProceedWithCall,
+                LogPropertySetters(callLog),
+                If(IsPropertyGetter.And(ReturnsEmptyCollection.Or(PropertyNotSet(callLog).And(ReturnsNull))),
+                   Do(OverrideReturnValue(i => context.Resolve(i.Method.ReturnType)),
+                      SetIdOfNewObject,
+                      SetInverseNavigationProperty,
+                      PersistGeneratedValue)));
 
-            return _proxyGenerator.CreateClassProxy((Type) request, 
-                    new CompositeInterceptor(
-                        // first allow the invocation to proceed
-                        new ProceedingInterceptor(),
+            return _proxyGenerator.CreateClassProxy((Type)request, intercept);
+        }
 
-                        // log the invocation if it is a property setter
-                        new FilteringInterceptor(
-                            new PropertySetterInterceptionPolicy(),
-                            new PropertyLoggingInterceptor(callLog)),
+        private static IInterceptionPolicy PropertyNotSet(ISet<PropertyInfo> callLog)
+        {
+            return new InverseInterceptionPolicy(new PropertyLoggedInterceptionPolicy(callLog));
+        }
 
-                        // then check -
-                        new FilteringInterceptor(    
-                            new AndInterceptionPolicy(
-                                // the invocation was a property getter
-                                new PropertyGetterInterceptionPolicy(),
-                                // the property hasn't been set
-                                new InverseInterceptionPolicy(new PropertyLoggedInterceptionPolicy(callLog)),
-                                // and the return value was null or empty collection
-                                new OrInterceptionPolicy(               
-                                    new NullReturnValueInterceptionPolicy(),
-                                    new EmptyCollectionReturnValueInterceptionPolicy())),
-                            // if the above conditions pass
-                            new CompositeInterceptor(
-                                // override the return value with an AutoFixture resolved object
-                                new ReturnValueOverrideInterceptor(i => context.Resolve(i.Method.ReturnType)),
-                                // set the Id property of the new object
-                                new IdPropertySetterInterceptor(),
-                                // set the parent of the new object
-                                new ParentPropertySetterInterceptor(),
-                                // then persist the property value
-                                new SetPropertyReturnValueInterceptor()))));
+        private static IInterceptionPolicy ReturnsNull { get { return new NullReturnValueInterceptionPolicy(); } }
+        private static IInterceptionPolicy ReturnsEmptyCollection { get { return new EmptyCollectionReturnValueInterceptionPolicy(); } }
+        private static IInterceptionPolicy IsPropertyGetter { get { return new PropertyGetterInterceptionPolicy(); } }
+        private static IInterceptor ProceedWithCall { get { return new ProceedingInterceptor(); } }
+        private static IInterceptor PersistGeneratedValue { get { return new SetPropertyReturnValueInterceptor(); } }
+        private static IInterceptor SetInverseNavigationProperty { get { return new ParentPropertySetterInterceptor(); } }
+        private static IInterceptor SetIdOfNewObject { get { return new IdPropertySetterInterceptor(); } }
+
+        private static IInterceptor If(IInterceptionPolicy policy, IInterceptor interceptor)
+        {
+            return new FilteringInterceptor(policy, interceptor);
+        }
+
+        private static IInterceptor Do(params IInterceptor[] interceptors)
+        {
+            return new CompositeInterceptor(interceptors);
+        }
+
+        private static IInterceptor LogPropertySetters(ISet<PropertyInfo> callLog)
+        {
+            return If(
+                new PropertySetterInterceptionPolicy(),
+                new PropertyLoggingInterceptor(callLog));
+        }
+
+        private static IInterceptor OverrideReturnValue(Func<IInvocation, object> objectFactory)
+        {
+            return new ReturnValueOverrideInterceptor(objectFactory);
         }
     }
 }
