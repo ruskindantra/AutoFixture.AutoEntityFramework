@@ -43,23 +43,5 @@ namespace AutoFixture.AutoEF.Tests.Interception
             // Verify outcome
             foo.Bar.Should().Be(bar);
         }
-
-        [Theory, AutoNSub]
-        public void SetsPropertyOnValueReturnWhenTableNameId(SUT sut, IInvocation invocation)
-        {
-            // Setup fixture
-            var far = new Far();
-            var boo = new Boo();
-            invocation.Method.Returns(far.GetType().GetProperty("Boo").GetGetMethod());
-
-            invocation.InvocationTarget.Returns(far);
-            invocation.ReturnValue = boo;
-
-            // Exercise system
-            sut.Intercept(invocation);
-
-            // Verify outcome
-            far.Boo.Should().Be(boo);
-        }
     }
 }

@@ -101,16 +101,5 @@ namespace AutoFixture.AutoEF.Tests
 
             result.Should().BeTrue();
         }
-
-        [Theory, AutoNSub]
-        public void ReturnsTrueWhenPropertyIsCollectionWhenTableNameId([Frozen] IEntityTypesProvider typesProvider, SUT sut)
-        {
-            typesProvider.GetTypes().Returns(new[] { typeof(Qix), typeof(Boo) });
-            var property = typeof(Boo).GetProperty("Qixes");
-
-            var result = sut.IsSatisfiedBy(property);
-
-            result.Should().BeTrue();
-        }
     }
 }
