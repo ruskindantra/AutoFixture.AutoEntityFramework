@@ -89,5 +89,78 @@ namespace AutoFixture.AutoEF.Tests
         {
             foo.Bar.Should().BeSameAs(bar);
         }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void FixtureCanCreateEFEntityWhenTableNameId(Far far)
+        {
+            far.Should().NotBeNull();
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void GeneratedPropertyIsNotNullWhenTableNameId(Far far)
+        {
+            far.Boo.Should().NotBeNull();
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void GeneratedCollectionIsNotEmptyWhenTableNameId(Boo boo)
+        {
+            boo.Qixes.Should().NotBeEmpty();
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void GeneratedCollectionCanBeClearedWhenTableNameId(Boo boo)
+        {
+            boo.Qixes.Clear();
+            boo.Qixes.Should().HaveCount(0);
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void IdShouldMatchNavigationPropertyIdWhenTableNameId(Far far)
+        {
+            far.BooId.Should().Be(far.Boo.BooId);
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void ParentShouldBeSameObjectWhenTableNameId(Far far)
+        {
+            far.Boo.Far.Should().BeSameAs(far);
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void ParentIdShouldBeSameWhenTableNameId(Far far)
+        {
+            far.Boo.FarId.Should().Be(far.FarId);
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void ParentShouldBeSameForCollectionsWhenTableNameId(Boo boo)
+        {
+            foreach (var qix in boo.Qixes)
+            {
+                (qix.Boo == boo).Should().BeTrue();
+            }
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void RepeatedAccessYieldsSameObjectWhenTableNameId(Far far)
+        {
+            var boo1 = far.Boo;
+            var boo2 = far.Boo;
+
+            boo1.Should().BeSameAs(boo2);
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void UnfrozenTypeYieldsDifferentObjectWhenTableNameId(Boo boo, Far far)
+        {
+            far.Boo.Should().NotBeSameAs(boo);
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void FrozenTypeYieldsSameObjectWhenTableNameId([Frozen] Boo boo, Far far)
+        {
+            far.Boo.Should().BeSameAs(boo);
+        }
     }
 }
