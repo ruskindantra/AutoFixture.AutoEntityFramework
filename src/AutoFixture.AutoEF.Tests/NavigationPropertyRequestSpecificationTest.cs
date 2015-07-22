@@ -68,38 +68,5 @@ namespace AutoFixture.AutoEF.Tests
 
             result.Should().BeTrue();
         }
-
-        [Theory, AutoNSub]
-        public void ReturnsFalseWhenDeclaringTypeNotRegisteredWhenTableNameId([Frozen] IEntityTypesProvider typesProvider, SUT sut)
-        {
-            typesProvider.GetTypes().Returns(new[] { typeof(Boo) });
-            var property = typeof(Far).GetProperty("Boo");
-
-            var result = sut.IsSatisfiedBy(property);
-
-            result.Should().BeFalse();
-        }
-
-        [Theory, AutoNSub]
-        public void ReturnsFalseWhenPropertyTypeNotRegisteredWhenTableNameId([Frozen] IEntityTypesProvider typesProvider, SUT sut)
-        {
-            typesProvider.GetTypes().Returns(new[] { typeof(Far) });
-            var property = typeof(Far).GetProperty("Boo");
-
-            var result = sut.IsSatisfiedBy(property);
-
-            result.Should().BeFalse();
-        }
-
-        [Theory, AutoNSub]
-        public void ReturnsTrueWhenBothTypesRegisteredWhenTableNameId([Frozen] IEntityTypesProvider typesProvider, SUT sut)
-        {
-            typesProvider.GetTypes().Returns(new[] { typeof(Far), typeof(Boo) });
-            var property = typeof(Far).GetProperty("Boo");
-
-            var result = sut.IsSatisfiedBy(property);
-
-            result.Should().BeTrue();
-        }
     }
 }

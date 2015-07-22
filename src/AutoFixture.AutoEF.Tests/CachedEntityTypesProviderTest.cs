@@ -41,5 +41,6 @@ namespace AutoFixture.AutoEF.Tests
             resultSecond.Should().BeEquivalentTo(typesFirst)
                 .And.BeEquivalentTo(resultFirst);
         }
+
     }
 }
