@@ -84,8 +84,11 @@
     <Compile Include="Interception\SetPropertyReturnValueInterceptorTest.cs" />
     <Compile Include="InterceptorsFieldRequestSpecificationTest.cs" />
     <Compile Include="MockEntities\Bar.cs" />
+    <Compile Include="MockEntities\Boo.cs" />
     <Compile Include="MockEntities\Foo.cs" />
+    <Compile Include="MockEntities\Far.cs" />
     <Compile Include="MockEntities\MockDbContext.cs" />
+    <Compile Include="MockEntities\Qix.cs" />
     <Compile Include="MockEntities\Qux.cs" />
     <Compile Include="NavigationPropertyRequestSpecificationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
