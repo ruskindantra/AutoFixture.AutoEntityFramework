@@ -45,16 +45,5 @@ namespace AutoFixture.AutoEF.Tests.Interception
 
             result.Should().BeFalse();
         }
-
-
-        [Theory, AutoNSub]
-        public void ReturnsTrueOnGetterWhenTableNameId(SUT sut, IInvocation invocation)
-        {
-            invocation.Method.Returns(typeof(Far).GetProperty("Boo").GetGetMethod());
-
-            var result = sut.ShouldIntercept(invocation);
-
-            result.Should().BeTrue();
-        }
     }
 }
