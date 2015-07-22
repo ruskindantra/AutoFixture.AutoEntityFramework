@@ -54,20 +54,6 @@ namespace AutoFixture.AutoEF.Tests.Interception
         }
 
         [Theory, AutoNSub]
-        public void SetsParentWhenPropertyExistsWhenTableNameId(SUT sut, IInvocation invocation, int farId)
-        {
-            var far = new Far() { FarId = farId };
-            var boo = new Boo();
-
-            invocation.InvocationTarget.Returns(far);
-            invocation.ReturnValue = boo;
-
-            sut.Intercept(invocation);
-
-            boo.Far.Should().BeSameAs(far);
-        }
-
-        [Theory, AutoNSub]
         public void SetsParentIdWhenPropertyExistsWhenTableNameId(SUT sut, IInvocation invocation, int farId)
         {
             var far = new Far() { FarId = farId };

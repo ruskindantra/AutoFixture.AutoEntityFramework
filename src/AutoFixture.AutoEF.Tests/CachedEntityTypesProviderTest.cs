@@ -41,31 +41,5 @@ namespace AutoFixture.AutoEF.Tests
             resultSecond.Should().BeEquivalentTo(typesFirst)
                 .And.BeEquivalentTo(resultFirst);
         }
-
-        [Theory, AutoNSub]
-        public void SutIsDecoratorWhenTableNameId([Frozen] IEntityTypesProvider decorated, CachedEntityTypesProvider sut)
-        {
-            var types = new[] { typeof(Far), typeof(Boo), typeof(Qix) };
-            decorated.GetTypes().Returns(types);
-
-            var result = sut.GetTypes();
-
-            result.Should().BeEquivalentTo(types);
-        }
-
-        [Theory, AutoNSub]
-        public void TypesEnumeratedOnlyOnceWhenTableNameId([Frozen] IEntityTypesProvider decorated, CachedEntityTypesProvider sut)
-        {
-            IEnumerable<Type> typesFirst = new[] { typeof(Far), typeof(Boo) };
-            IEnumerable<Type> typesSecond = new[] { typeof(Qix), typeof(object) };
-
-            decorated.GetTypes().Returns(typesFirst, typesSecond);
-
-            var resultFirst = sut.GetTypes();
-            var resultSecond = sut.GetTypes();
-
-            resultSecond.Should().BeEquivalentTo(typesFirst)
-                .And.BeEquivalentTo(resultFirst);
-        }
     }
 }
