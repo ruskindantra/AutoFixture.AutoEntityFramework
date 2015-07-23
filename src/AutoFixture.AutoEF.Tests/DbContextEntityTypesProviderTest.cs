@@ -36,7 +36,7 @@ namespace AutoFixture.AutoEF.Tests
             // Exercise system
             var types = sut.GetTypes();
             // Verify outcome
-            types.Should().BeEquivalentTo(typeof (Foo), typeof (Bar), typeof(Qux));
+            types.Should().BeEquivalentTo(typeof (Foo), typeof (Bar), typeof(Qux), typeof(Far), typeof(Boo), typeof(Qix));
             // Teardown
         }
     }

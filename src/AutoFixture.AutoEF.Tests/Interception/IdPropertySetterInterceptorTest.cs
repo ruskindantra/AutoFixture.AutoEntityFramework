@@ -39,5 +39,20 @@ namespace AutoFixture.AutoEF.Tests.Interception
 
             bar.Id.Should().Be(barId);
         }
+
+        [Theory, AutoNSub]
+        public void SetsIdOnMatchingPropertyWhenTableNameId(SUT sut, IInvocation invocation, int booId)
+        {
+            var far = new Far { BooId = booId };
+            var boo = new Boo();
+
+            invocation.Method.Returns(far.GetType().GetProperty("Boo").GetGetMethod());
+            invocation.InvocationTarget.Returns(far);
+            invocation.ReturnValue = boo;
+
+            sut.Intercept(invocation);
+
+            boo.BooId.Should().Be(booId);
+        }
     }
 }

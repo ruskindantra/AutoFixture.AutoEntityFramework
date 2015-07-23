@@ -22,6 +22,11 @@ namespace AutoFixture.AutoEF.Interception
             var idProp = target.GetType().GetProperty(propertyName + "Id", bindingFlags);
             var proxyIdProp = invocation.ReturnValue.GetType().GetProperty("Id", bindingFlags);
 
+            if (proxyIdProp == null)
+            {
+                proxyIdProp = invocation.ReturnValue.GetType().GetProperty(propertyName + "Id", bindingFlags);
+            }
+
             if (idProp != null && proxyIdProp != null)
             {
                 proxyIdProp.SetValue(invocation.ReturnValue, idProp.GetValue(target));

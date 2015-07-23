@@ -45,6 +45,11 @@ namespace AutoFixture.AutoEF.Interception
             var childIdProperty = child.GetType().GetProperty(parentProperty.Name + "Id");
             var parentIdProperty = parent.GetType().GetProperty("Id");
 
+            if (parentIdProperty == null)
+            {
+                parentIdProperty = parent.GetType().GetProperty(parentProperty.Name + "Id");
+            }
+
             if (childIdProperty != null && parentIdProperty != null)
             {
                 childIdProperty.SetValue(child, parentIdProperty.GetValue(parent));
