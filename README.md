@@ -37,3 +37,4 @@ When the interceptor creates a new navigation object, it will check for a matchi
 
 It will also check for any properties on the new object that have the same type as the parent object. If there is exactly one match, it will set that property to the parent object, along with the accompanying `____Id` property, so that `foo.Bar.Foo == foo` and `foo.Bar.FooId == foo.Id`
 
+**Note**: In future versions of Entity Framework it will be possible to analyse the DbContext metadata in order to determine the actual relationships between objects, so the customization will be able to construct 'correct' object graphs on the fly.
