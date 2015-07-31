@@ -6,7 +6,7 @@ using System.Reflection;
 namespace AutoFixture.AutoEF
 {
     /// <summary>
-    /// Builds list of EF types by enumerating through DbSet properties on a DbContext subclass
+    /// Builds list of EF types by enumerating through DbSet and IDbSet properties on a DbContext subclass
     /// </summary>
     public class DbContextEntityTypesProvider : IEntityTypesProvider
     {
@@ -23,9 +23,11 @@ namespace AutoFixture.AutoEF
         public IEnumerable<Type> GetTypes()
         {
             return from prop in _dbContext.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                   let t = prop.PropertyType 
-                   where t.IsGenericType
-                       && t.Name.Remove(t.Name.IndexOf('`')) == "DbSet"
+                   let t = prop.PropertyType
+                   where
+                       t.IsGenericType
+                       && (t.Name.Remove(t.Name.IndexOf('`')) == "DbSet"
+                           || t.Name.Remove(t.Name.IndexOf('`')) == "IDbSet")
                    select t.GenericTypeArguments[0];
         }
     }
