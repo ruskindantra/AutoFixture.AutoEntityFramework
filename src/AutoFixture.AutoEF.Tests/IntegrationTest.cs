@@ -89,5 +89,26 @@ namespace AutoFixture.AutoEF.Tests
         {
             foo.Bar.Should().BeSameAs(bar);
         }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void IdShouldMatchNavigationPropertyIdWhenTableNameId(Far far)
+        {
+            far.BooId.Should().Be(far.Boo.BooId);
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void ParentIdShouldBeSameWhenTableNameId(Far far)
+        {
+            far.Boo.FarId.Should().Be(far.FarId);
+        }
+
+        [Theory, AutoEFData(typeof(MockDbContext))]
+        public void ParentIdShouldBeSameForCollectionsWhenTableNameId(Boo boo)
+        {
+            foreach (var qix in boo.Qixes)
+            {
+                qix.BooId.Should().Be(boo.BooId);
+            }
+        }
     }
 }
