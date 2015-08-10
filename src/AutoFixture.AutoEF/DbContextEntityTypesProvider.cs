@@ -25,7 +25,7 @@ namespace AutoFixture.AutoEF
             return from prop in _dbContext.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                    let t = prop.PropertyType 
                    where t.IsGenericType
-                       && t.Name.Remove(t.Name.IndexOf('`')) == "DbSet"
+                       && (t.Name.Remove(t.Name.IndexOf('`')) == "DbSet" || t.Name.Remove(t.Name.IndexOf('`')) == "IDbSet")
                    select t.GenericTypeArguments[0];
         }
     }

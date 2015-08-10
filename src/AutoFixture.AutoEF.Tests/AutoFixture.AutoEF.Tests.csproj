@@ -85,6 +85,7 @@
     <Compile Include="InterceptorsFieldRequestSpecificationTest.cs" />
     <Compile Include="MockEntities\Bar.cs" />
     <Compile Include="MockEntities\Boo.cs" />
+    <Compile Include="MockEntities\MockDbContextIDbSet.cs" />
     <Compile Include="MockEntities\Foo.cs" />
     <Compile Include="MockEntities\Far.cs" />
     <Compile Include="MockEntities\MockDbContext.cs" />

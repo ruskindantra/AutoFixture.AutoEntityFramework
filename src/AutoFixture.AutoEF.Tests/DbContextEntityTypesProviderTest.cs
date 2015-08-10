@@ -39,5 +39,17 @@ namespace AutoFixture.AutoEF.Tests
             types.Should().BeEquivalentTo(typeof (Foo), typeof (Bar), typeof(Qux), typeof(Far), typeof(Boo), typeof(Qix));
             // Teardown
         }
+
+        [Fact]
+        public void AllEntityTypesReturnedForIDbSet()
+        {
+            // Fixture setup
+            var sut = new DbContextEntityTypesProvider(typeof (MockDbContextIDbSet));
+            // Exercise system
+            var types = sut.GetTypes();
+            // Verify outcome
+            types.Should().BeEquivalentTo(typeof(Foo), typeof(Bar), typeof(Qux), typeof(Far), typeof(Boo), typeof(Qix));
+            // Teardown
+        }
     }
 }
