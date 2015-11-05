@@ -1,7 +1,7 @@
 AutoFixture.AutoEntityFramework
 ===============================
 
-An AutoFixture customization that lazy-loads navigation properties on Entity Framework objects.
+An [AutoFixture](https://github.com/AutoFixture/AutoFixture) customization that lazy-loads navigation properties on Entity Framework objects.
 
 ### Initializing the customization
 
