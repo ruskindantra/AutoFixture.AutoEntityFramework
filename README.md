@@ -1,3 +1,7 @@
+# This project has been superseded by [LazyEntityGraph](https://github.com/alexfoxgill/LazyEntityGraph), a general-purpose library for proxying object networks and lazy-loading navigation properties. See the [getting started](https://github.com/alexfoxgill/LazyEntityGraph/wiki) page for more information.
+
+***
+
 AutoFixture.AutoEntityFramework
 ===============================
 
