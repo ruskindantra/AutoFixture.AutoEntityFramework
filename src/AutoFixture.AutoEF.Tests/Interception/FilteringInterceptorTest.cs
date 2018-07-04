@@ -3,6 +3,7 @@ using Castle.DynamicProxy;
 using FluentAssertions;
 using NSubstitute;
 using System;
+using Theory = Xunit.TheoryAttribute;
 using Xunit.Extensions;
 
 namespace AutoFixture.AutoEF.Tests.Interception
@@ -14,7 +15,7 @@ namespace AutoFixture.AutoEF.Tests.Interception
         {
             Action act = () => new FilteringInterceptor(null, interceptor, elseInterceptor);
 
-            act.ShouldThrow<ArgumentNullException>();
+            act.Should().Throw<ArgumentNullException>();
         }
 
         [Theory, AutoNSub]
@@ -22,7 +23,7 @@ namespace AutoFixture.AutoEF.Tests.Interception
         {
             Action act = () => new FilteringInterceptor(policy, null, elseInterceptor);
 
-            act.ShouldThrow<ArgumentNullException>();
+            act.Should().Throw<ArgumentNullException>();
         }
 
         [Theory, AutoNSub]
@@ -30,7 +31,7 @@ namespace AutoFixture.AutoEF.Tests.Interception
         {
             Action act = () => new FilteringInterceptor(policy, interceptor, null);
 
-            act.ShouldThrow<ArgumentNullException>();
+            act.Should().Throw<ArgumentNullException>();
         }
 
         [Theory, AutoNSub]

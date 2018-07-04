@@ -1,13 +1,12 @@
-﻿using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.AutoNSubstitute;
-using Ploeh.AutoFixture.Xunit;
+﻿using AutoFixture.AutoNSubstitute;
+using AutoFixture.Xunit2;
 
 namespace AutoFixture.AutoEF.Tests
 {
     public class AutoNSubAttribute : AutoDataAttribute
     {
         public AutoNSubAttribute()
-            : base(new Fixture().Customize(new AutoNSubstituteCustomization()))
+            : base(() => new Fixture().Customize(new AutoNSubstituteCustomization()))
         { }
     }
 

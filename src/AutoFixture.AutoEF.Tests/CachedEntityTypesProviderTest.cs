@@ -1,10 +1,10 @@
 ﻿using AutoFixture.AutoEF.Tests.MockEntities;
 using FluentAssertions;
 using NSubstitute;
-using Ploeh.AutoFixture.Xunit;
+using AutoFixture.Xunit2;
 using System;
 using System.Collections.Generic;
-using Xunit.Extensions;
+using Xunit;
 
 namespace AutoFixture.AutoEF.Tests
 {

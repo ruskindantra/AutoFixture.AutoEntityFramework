@@ -1,10 +1,11 @@
 ﻿using AutoFixture.AutoEF.Tests.MockEntities;
 using FluentAssertions;
 using NSubstitute;
-using Ploeh.AutoFixture.Kernel;
-using Ploeh.AutoFixture.Xunit;
+using AutoFixture.Kernel;
+using AutoFixture.Xunit2;
 using System;
 using Xunit.Extensions;
+using Theory = Xunit.TheoryAttribute;
 
 namespace AutoFixture.AutoEF.Tests
 {
@@ -21,8 +22,8 @@ namespace AutoFixture.AutoEF.Tests
         [Theory, AutoNSub]
         public void ThrowsOnNullRequest(SUT sut)
         {
-            sut.Invoking(s => s.IsSatisfiedBy(null))
-                .ShouldThrow<ArgumentNullException>();
+            sut.Invoking(s => s.IsSatisfiedBy(null)).
+                Should().Throw<ArgumentNullException>();
         }
 
         [Theory, AutoNSub]

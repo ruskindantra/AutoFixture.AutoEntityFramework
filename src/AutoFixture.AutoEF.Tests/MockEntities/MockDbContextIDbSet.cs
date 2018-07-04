@@ -1,14 +1,14 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace AutoFixture.AutoEF.Tests.MockEntities
 {
     class MockDbContextIDbSet : DbContext
     {
-        public IDbSet<Foo> Foos { get; set; }
-        public IDbSet<Bar> Bars { get; set; }
-        public IDbSet<Qux> Quxes { get; set; }
-        public IDbSet<Far> Fars { get; set; }
-        public IDbSet<Boo> Boos { get; set; }
-        public IDbSet<Qix> Qixes { get; set; }
+        public DbSet<Foo> Foos { get; set; }
+        public DbSet<Bar> Bars { get; set; }
+        public DbSet<Qux> Quxes { get; set; }
+        public DbSet<Far> Fars { get; set; }
+        public DbSet<Boo> Boos { get; set; }
+        public DbSet<Qix> Qixes { get; set; }
     }
 }
