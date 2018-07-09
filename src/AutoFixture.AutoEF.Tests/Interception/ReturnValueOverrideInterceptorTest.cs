@@ -1,10 +1,9 @@
 ﻿using AutoFixture.AutoEF.Interception;
 using Castle.DynamicProxy;
 using FluentAssertions;
-using Ploeh.AutoFixture.Xunit;
+using AutoFixture.Xunit2;
 using System;
 using Xunit;
-using Xunit.Extensions;
 
 namespace AutoFixture.AutoEF.Tests.Interception
 {
@@ -21,8 +20,8 @@ namespace AutoFixture.AutoEF.Tests.Interception
         [Theory, AutoData]
         public void ThrowsOnNullInvocation(SUT sut)
         {
-            sut.Invoking(s => s.Intercept(null))
-                .ShouldThrow<ArgumentNullException>();
+            sut.Invoking(s => s.Intercept(null)).
+                Should().Throw<ArgumentNullException>();
         }
 
         [Fact]
@@ -30,7 +29,7 @@ namespace AutoFixture.AutoEF.Tests.Interception
         {
             Action act = () => new SUT(null);
 
-            act.ShouldThrow<ArgumentNullException>();
+            act.Should().Throw<ArgumentNullException>();
         }
 
         [Theory, AutoNSub]

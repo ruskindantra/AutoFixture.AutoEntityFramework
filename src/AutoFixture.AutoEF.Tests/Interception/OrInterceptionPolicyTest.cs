@@ -4,7 +4,6 @@ using FluentAssertions;
 using NSubstitute;
 using System;
 using Xunit;
-using Xunit.Extensions;
 
 namespace AutoFixture.AutoEF.Tests.Interception
 {
@@ -15,7 +14,7 @@ namespace AutoFixture.AutoEF.Tests.Interception
         {
             Action act = () => new OrInterceptionPolicy(null);
 
-            act.ShouldThrow<ArgumentNullException>();
+            act.Should().Throw<ArgumentNullException>();
         }
 
         [Theory, AutoNSub]
@@ -27,8 +26,8 @@ namespace AutoFixture.AutoEF.Tests.Interception
         [Theory, AutoNSub]
         public void ThrowsOnNullInvocation(OrInterceptionPolicy sut)
         {
-            sut.Invoking(s => s.ShouldIntercept(null))
-                .ShouldThrow<ArgumentNullException>();
+            sut.Invoking(s => s.ShouldIntercept(null)).
+                Should().Throw<ArgumentNullException>();
         }
 
         [Theory, AutoNSub]

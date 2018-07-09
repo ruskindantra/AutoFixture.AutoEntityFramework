@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using NSubstitute;
-using Ploeh.AutoFixture;
+using AutoFixture;
 using System;
 using Xunit;
 
@@ -14,7 +14,7 @@ namespace AutoFixture.AutoEF.Tests
             // Fixture setup
             Action act = () => new EntityCustomization(null);
             // Exercise system and verify outcome
-            act.ShouldThrow<ArgumentNullException>();
+            act.Should().Throw<ArgumentNullException>();
             // Teardown
         }
 

@@ -13,7 +13,7 @@ namespace AutoFixture.AutoEF.Tests
             // Fixture setup
             Action act = () => new DbContextEntityTypesProvider(null);
             // Exercise system and verify outcome
-            act.ShouldThrow<ArgumentNullException>();
+            act.Should().Throw<ArgumentNullException>();
             // Teardown
         }
 

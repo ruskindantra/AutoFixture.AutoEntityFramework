@@ -1,6 +1,6 @@
 ﻿using AutoFixture.AutoEF.Interception;
 using Castle.DynamicProxy;
-using Ploeh.AutoFixture.Kernel;
+using AutoFixture.Kernel;
 using System;
 using System.Collections.Generic;
 using System.Reflection;

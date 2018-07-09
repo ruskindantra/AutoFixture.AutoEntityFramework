@@ -1,16 +1,17 @@
 ﻿using AutoFixture.AutoEF.Tests.MockEntities;
 using FluentAssertions;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Xunit;
+using AutoFixture;
+using AutoFixture.Xunit2;
 using System;
 using Xunit.Extensions;
+using Theory = Xunit.TheoryAttribute;
 
 namespace AutoFixture.AutoEF.Tests
 {
     public class AutoEFDataAttribute : AutoDataAttribute
     {
         public AutoEFDataAttribute(Type dbContextType)
-            : base(new Fixture()
+            : base(() => new Fixture()
                 .Customize(new EntityCustomization(new DbContextEntityTypesProvider(dbContextType))))
         { }
     }

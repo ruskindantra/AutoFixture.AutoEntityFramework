@@ -5,6 +5,7 @@ using FluentAssertions;
 using NSubstitute;
 using System;
 using Xunit.Extensions;
+using Theory = Xunit.TheoryAttribute;
 
 namespace AutoFixture.AutoEF.Tests.Interception
 {
@@ -21,8 +22,8 @@ namespace AutoFixture.AutoEF.Tests.Interception
         [Theory, AutoNSub]
         public void ThrowsOnNullInvocation(SUT sut)
         {
-            sut.Invoking(s => s.Intercept(null))
-                .ShouldThrow<ArgumentNullException>();
+            sut.Invoking(s => s.Intercept(null)).
+                Should().Throw<ArgumentNullException>();
         }
 
         [Theory, AutoNSub]
